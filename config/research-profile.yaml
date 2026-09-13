@@ -15,7 +15,7 @@ paper_selection:
   journals: { prefer: [], allow: [] }
   preprints: { allowed: true, require_exact_source: true }
 language:
-  explanation: 'en'
+  explanation: 'zh-CN'
   terminology: 'mixed-zh-en'
 daily:
   papers_per_run: 1
