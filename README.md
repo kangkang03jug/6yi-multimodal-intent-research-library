@@ -6,6 +6,8 @@ This is a reusable, static-first framework for a personal research library. It t
 
 The recommended automation is a cloud ChatGPT Scheduled Task with repository access. Codex CLI + cron/systemd remains available for an always-on lab server. Neither workflow requires an OpenAI API key; ChatGPT/Codex usage remains subject to the account's plan and limits.
 
+The core setup is intentionally independent: GitHub Repository + GitHub Pages + Paper Library + ChatGPT Scheduled Task work without Cloudflare or OAuth. **Owner Editing and public Discussion are optional advanced features**; skip the deployment section below during a first-time setup and add them later only when needed.
+
 ## Getting Started — recommended: ask Codex
 
 You do not need to understand Astro, GitHub Pages, GitHub Apps, Cloudflare, Codex CLI, or the internal code structure.
@@ -85,9 +87,9 @@ The browser never receives a GitHub OAuth token, PAT, App private key, or instal
 
 AI Summary is generated reading context. **My Notes** are the researcher's long-term Markdown memory, and **My Tags** are the researcher's own taxonomy. They are kept in `data/user/<paper-id>.json`, separate from generated `data/papers/<paper-id>.json`. The repository is also the backup: clone it, inspect history, and recover an earlier commit when needed.
 
-### One-time Owner Editing deployment
+### Optional advanced features: Owner Editing and public Discussion
 
-These steps are required once per personal library; “configure OAuth” alone is not sufficient.
+These steps are only needed if you want authenticated GitHub write-back or public paper comments. They are not required for the basic Research Library workflow.
 
 1. **Create a GitHub App.** In GitHub **Settings → Developer settings → GitHub Apps → New GitHub App**, use the library's Pages URL as the homepage. Disable webhooks unless they are needed elsewhere. Generate and download one private key. The same GitHub App supplies the OAuth Client ID/Client Secret used for Owner login.
 2. **Set the callback URL.** It must be the deployed Worker URL followed by `/auth/callback`, for example `https://<worker>.<account>.workers.dev/auth/callback`. If the Worker URL is not known yet, deploy the skeleton once to reserve it, then return to the App settings and set the exact callback.
@@ -120,15 +122,13 @@ npx wrangler d1 create research-library-comments
 npx wrangler d1 migrations apply research-library-comments --remote --config worker/wrangler.toml
 ```
 
-````
-
 `GITHUB_APP_PRIVATE_KEY` is the complete PEM file. `SESSION_SECRET` must be a long random value. `ALLOWED_ORIGIN` is the exact Pages origin, such as `https://<owner>.github.io`, with no repository path. Deploy again after setting secrets.
 
 8. **Expose only the Worker origin to the static build.** Set the repository Actions variable `PUBLIC_EDITOR_API_URL` to the Worker origin (no `/api` suffix):
 
 ```bash
 gh variable set PUBLIC_EDITOR_API_URL --body "https://<worker>.<account>.workers.dev" --repo <owner>/<repository>
-````
+```
 
 As a fallback, the same origin may be committed to `editor.api_origin` in the Research Profile; the Actions variable takes precedence.
 
