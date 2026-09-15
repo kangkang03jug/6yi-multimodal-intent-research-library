@@ -32,7 +32,12 @@ const STATUSES = new Set(['New', 'Worth Reading', 'Reading', 'Read', 'Important'
 const commentRate = new Map<string, number[]>();
 const cleanCommentText = (value: unknown, max: number) =>
   typeof value === 'string'
-    ? value.normalize('NFKC').replace(/<[^>]*>/g, '').replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '').trim().slice(0, max)
+    ? value
+        .normalize('NFKC')
+        .replace(/<[^>]*>/g, '')
+        .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, '')
+        .trim()
+        .slice(0, max)
     : '';
 const validPaperId = (value: unknown): value is string =>
   typeof value === 'string' && /^[a-z0-9-]{1,120}$/.test(value);
@@ -506,22 +511,29 @@ export default {
         return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
       }
 
-    if (url.pathname === '/api/me' && !bearerToken(request) && !readCookie(request, 'rl_session'))
+      if (url.pathname === '/api/me' && !bearerToken(request) && !readCookie(request, 'rl_session'))
         return jsonResponse({ authenticated: false }, 200, allowedOrigin);
 
-      if (url.pathname === '/api/comments' && (request.method === 'GET' || request.method === 'POST')) {
+      if (
+        url.pathname === '/api/comments' &&
+        (request.method === 'GET' || request.method === 'POST')
+      ) {
         if (!env.COMMENTS_DB)
           return jsonResponse({ error: 'Comments storage is not configured' }, 503, allowedOrigin);
         if (request.method === 'GET') {
           const paperId = url.searchParams.get('paper_id');
-          if (!validPaperId(paperId)) return jsonResponse({ error: 'Invalid paper id' }, 400, allowedOrigin);
+          if (!validPaperId(paperId))
+            return jsonResponse({ error: 'Invalid paper id' }, 400, allowedOrigin);
           const result = await env.COMMENTS_DB.prepare(
             'SELECT id, paper_id, nickname, body, created_at FROM comments WHERE paper_id = ?1 AND deleted_at IS NULL ORDER BY created_at DESC LIMIT 100',
-          ).bind(paperId).all();
+          )
+            .bind(paperId)
+            .all();
           return jsonResponse({ comments: result.results }, 200, allowedOrigin);
         }
         const body = (await request.json().catch(() => null)) as JsonRecord | null;
-        if (!validCommentPayload(body)) return jsonResponse({ error: 'Invalid comment' }, 400, allowedOrigin);
+        if (!validCommentPayload(body))
+          return jsonResponse({ error: 'Invalid comment' }, 400, allowedOrigin);
         const paperId = cleanCommentText(body?.paper_id, 120);
         const nickname = cleanCommentText(body?.nickname, 40);
         const commentBody = cleanCommentText(body?.body, 2000);
@@ -530,7 +542,16 @@ export default {
         const id = crypto.randomUUID();
         await env.COMMENTS_DB.prepare(
           'INSERT INTO comments (id, paper_id, nickname, body, created_at, ip_hash) VALUES (?1, ?2, ?3, ?4, ?5, ?6)',
-        ).bind(id, paperId, nickname, commentBody, new Date().toISOString(), await hashCommentIp(request)).run();
+        )
+          .bind(
+            id,
+            paperId,
+            nickname,
+            commentBody,
+            new Date().toISOString(),
+            await hashCommentIp(request),
+          )
+          .run();
         return jsonResponse({ ok: true, id }, 201, allowedOrigin);
       }
 
@@ -550,10 +571,14 @@ export default {
       if (!login) return jsonResponse({ error: 'Authentication required' }, 401, allowedOrigin);
 
       if (url.pathname.startsWith('/api/comments/') && request.method === 'DELETE') {
-        if (!env.COMMENTS_DB) return jsonResponse({ error: 'Comments storage is not configured' }, 503, allowedOrigin);
+        if (!env.COMMENTS_DB)
+          return jsonResponse({ error: 'Comments storage is not configured' }, 503, allowedOrigin);
         const id = decodeURIComponent(url.pathname.slice('/api/comments/'.length));
-        if (!/^[0-9a-f-]{8,80}$/i.test(id)) return jsonResponse({ error: 'Invalid comment id' }, 400, allowedOrigin);
-        await env.COMMENTS_DB.prepare('UPDATE comments SET deleted_at = ?1 WHERE id = ?2').bind(new Date().toISOString(), id).run();
+        if (!/^[0-9a-f-]{8,80}$/i.test(id))
+          return jsonResponse({ error: 'Invalid comment id' }, 400, allowedOrigin);
+        await env.COMMENTS_DB.prepare('UPDATE comments SET deleted_at = ?1 WHERE id = ?2')
+          .bind(new Date().toISOString(), id)
+          .run();
         return renewedSessionResponse({ ok: true }, allowedOrigin, login, env.SESSION_SECRET);
       }
 
