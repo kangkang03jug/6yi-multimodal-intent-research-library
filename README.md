@@ -111,6 +111,13 @@ These steps are required once per personal library; “configure OAuth” alone 
    npx wrangler secret put GITHUB_INSTALLATION_ID --config worker/wrangler.toml
    npx wrangler secret put SESSION_SECRET --config worker/wrangler.toml
    npx wrangler secret put ALLOWED_ORIGIN --config worker/wrangler.toml
+
+Public paper Discussions use Cloudflare D1 and never modify paper JSON. Before deploying the Worker, create the database and replace `REPLACE_WITH_D1_DATABASE_ID` in `worker/wrangler.toml`, then apply the checked-in migration:
+
+```bash
+npx wrangler d1 create research-library-comments
+npx wrangler d1 migrations apply research-library-comments --remote --config worker/wrangler.toml
+```
    ```
 
    `GITHUB_APP_PRIVATE_KEY` is the complete PEM file. `SESSION_SECRET` must be a long random value. `ALLOWED_ORIGIN` is the exact Pages origin, such as `https://<owner>.github.io`, with no repository path. Deploy again after setting secrets.
