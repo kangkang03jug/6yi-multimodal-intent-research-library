@@ -21,9 +21,7 @@ test('hero title wraps long text without overflowing at desktop and mobile width
     const metrics = await heroTitle.evaluate((element) => {
       const range = document.createRange();
       range.selectNodeContents(element);
-      const lineTops = new Set(
-        Array.from(range.getClientRects(), (rect) => Math.round(rect.top)),
-      );
+      const lineTops = new Set(Array.from(range.getClientRects(), (rect) => Math.round(rect.top)));
       return {
         whiteSpace: getComputedStyle(element).whiteSpace,
         lineCount: lineTops.size,
