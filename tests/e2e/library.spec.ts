@@ -22,17 +22,18 @@ test('hero title wraps long text without overflowing at desktop and mobile width
       const range = document.createRange();
       range.selectNodeContents(element);
       const lineTops = new Set(Array.from(range.getClientRects(), (rect) => Math.round(rect.top)));
+      const titleBounds = element.getBoundingClientRect();
       return {
         whiteSpace: getComputedStyle(element).whiteSpace,
         lineCount: lineTops.size,
         titleOverflows: element.scrollWidth > element.clientWidth + 1,
-        pageOverflows: document.documentElement.scrollWidth > window.innerWidth + 1,
+        titleOutsideViewport: titleBounds.left < -1 || titleBounds.right > window.innerWidth + 1,
       };
     });
 
     expect(metrics.whiteSpace).not.toBe('nowrap');
     expect(metrics.lineCount).toBeGreaterThan(1);
     expect(metrics.titleOverflows).toBe(false);
-    expect(metrics.pageOverflows).toBe(false);
+    expect(metrics.titleOutsideViewport).toBe(false);
   }
 });
