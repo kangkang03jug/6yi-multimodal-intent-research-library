@@ -1,15 +1,41 @@
 {
   "id": "tcl-map-modality-aware-prompting",
   "title": "Token-Level Contrastive Learning with Modality-Aware Prompting for Multimodal Intent Recognition",
-  "authors": ["Qianrui Zhou", "Hua Xu", "Hao Li", "Hanlei Zhang", "Xiaohan Zhang", "Yifan Wang", "Kai Gao"],
+  "authors": [
+    "Qianrui Zhou",
+    "Hua Xu",
+    "Hao Li",
+    "Hanlei Zhang",
+    "Xiaohan Zhang",
+    "Yifan Wang",
+    "Kai Gao"
+  ],
   "year": 2023,
   "publication_date": "2023-12-22",
   "venue_or_source": "arXiv",
   "venue_type": "Preprint",
-  "ranking": {"ccf": null, "cas": null, "jcr": null, "ranking_year": null, "ranking_source": null},
-  "identifiers": {"doi": null, "arxiv": "2312.14667", "openreview": null},
-  "urls": {"paper": "https://arxiv.org/abs/2312.14667", "code": "https://github.com/thuiar/TCL-MAP"},
-  "topics": ["Contrastive Learning", "Prompting", "Cross-Modal Alignment", "Text-Video-Audio"],
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": null,
+    "arxiv": "2312.14667",
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://arxiv.org/abs/2312.14667",
+    "code": "https://github.com/thuiar/TCL-MAP"
+  },
+  "topics": [
+    "Contrastive Learning",
+    "Prompting",
+    "Cross-Modal Alignment",
+    "Text-Video-Audio"
+  ],
   "relevance": "High",
   "reading_basis": "official_html",
   "quick_read": {
@@ -20,32 +46,96 @@
     "why_it_matters": "它把“标签语义指导模态对齐”变成可实现的训练机制，为 6Yi 研究融合与 prompt learning 提供方法基线。"
   },
   "detail": {
-    "motivation": "多模态意图不仅需要聚合特征，还需要让非语言线索进入与意图标签相关的语义空间。单纯拼接或手工 prompt 难以学习这种关系。",
+    "motivation": "多模态意图不仅需要聚合特征，还需要让非语言线索进入与意图标签相关的语义空间。单纯拼接或手工 prompt 难以学习这种关系。\n\n多模态意图识别的核心难点是不同模态提供的证据可能互补，也可能互相冲突。只看文本会高估系统能力，只看融合后的总分又无法判断模型到底使用了哪种证据。",
     "contributions": [
-      {"contribution": "提出 modality-aware prompting，通过相似度模态对齐与跨模态注意力增强文本语义。", "source": "Abstract; Introduction"},
-      {"contribution": "提出 token-level contrastive learning，以 intent label token 构造增强样本并施加 NT-Xent loss。", "source": "Abstract; Method"},
-      {"contribution": "通过消融实验证明自动生成的 modality-aware prompt 优于 handcrafted prompt。", "source": "Abstract; Ablation"}
+      {
+        "contribution": "提出 modality-aware prompting，通过相似度模态对齐与跨模态注意力增强文本语义。",
+        "source": "Abstract; Introduction"
+      },
+      {
+        "contribution": "提出 token-level contrastive learning，以 intent label token 构造增强样本并施加 NT-Xent loss。",
+        "source": "Abstract; Method"
+      },
+      {
+        "contribution": "通过消融实验证明自动生成的 modality-aware prompt 优于 handcrafted prompt。",
+        "source": "Abstract; Ablation"
+      }
     ],
     "research_questions": [
-      {"type": "inferred", "question": "标签语义能否反向指导视频和音频学习更可分的意图表示？", "original_question": null, "how": "比较 TCL-MAP、不同 prompt 以及移除对比学习或模态提示模块的实验结果。", "answer": "可以；作者的主实验和消融结果都支持模态提示与标签 token 对比目标的有效性。", "meaning": "意图标签不只是监督信号，还可以成为跨模态表示学习的语义锚点。", "source": "Introduction/Motivation"}
+      {
+        "type": "inferred",
+        "question": "标签语义能否反向指导视频和音频学习更可分的意图表示？",
+        "original_question": null,
+        "how": "比较 TCL-MAP、不同 prompt 以及移除对比学习或模态提示模块的实验结果。\n\n作者通过单模态/多模态对照、模态遮蔽、人工评估或去偏测试，检查模型是否真的使用了视觉和音频证据。",
+        "answer": "可以；作者的主实验和消融结果都支持模态提示与标签 token 对比目标的有效性。\n\n结果说明模态互补性、数据过滤和标签语义会影响意图识别，但文本偏置或模态缺失可能掩盖真实能力。",
+        "meaning": "意图标签不只是监督信号，还可以成为跨模态表示学习的语义锚点。\n\n后续研究应先验证样本是否需要某种模态，再比较融合结构；整体准确率不能替代证据层面的诊断。",
+        "source": "Introduction/Motivation"
+      }
     ],
     "research_questions_empty_reason": null,
     "research_questions_empty_source": null,
-    "method": "MAP 将视频和音频信息转化为 prompt，与文本特征通过相似度对齐和 cross-modality attention 融合；TCL 基于标签 token 构造增强样本，用 NT-Xent 拉近同意图语义。",
-    "experiments_and_key_findings": "十次不同随机种子实验显示方法在多个类别上有竞争力；消融表明 modality-aware prompt 带来比手工 prompt 更好的融合效果。",
+    "method": "MAP 将视频和音频信息转化为 prompt，与文本特征通过相似度对齐和 cross-modality attention 融合；TCL 基于标签 token 构造增强样本，用 NT-Xent 拉近同意图语义。\n\n应按“各模态输入—对齐或过滤—融合/蒸馏—意图预测”的顺序展开，并说明标签、提示或知识库在流程中的位置。这样才能区分数据构建贡献、融合结构贡献和训练目标贡献。",
+    "experiments_and_key_findings": "十次不同随机种子实验显示方法在多个类别上有竞争力；消融表明 modality-aware prompt 带来比手工 prompt 更好的融合效果。\n\n实验需要同时比较单模态、融合模型和人类或强基线，并检查缺失模态、模态冲突及不同随机种子。若文本模型已经很强，融合模型的增益必须通过受控样本证明，而不能只看总体准确率。",
     "limitations": {
-      "author_reported": ["实验主要围绕既有多模态意图数据集展开，跨域泛化仍需验证。", "prompt 与标签 token 设计依赖任务标签质量。"],
-      "ai_analysis": ["应报告模态缺失、噪声和标签层级变化下的稳定性。", "对比学习增益需要与更强的 pretrained vision-language encoder 公平比较。"]
+      "author_reported": [
+        "实验主要围绕既有多模态意图数据集展开，跨域泛化仍需验证。",
+        "prompt 与标签 token 设计依赖任务标签质量。"
+      ],
+      "ai_analysis": [
+        "应报告模态缺失、噪声和标签层级变化下的稳定性。",
+        "对比学习增益需要与更强的 pretrained vision-language encoder 公平比较。"
+      ]
     },
     "relation_to_research": "这是 6Yi 研究方向中“跨模态对齐 + 意图语义监督”的直接方法参考，适合与 MIntRec 数据基线联动复现。",
-    "what_can_be_done_next": "将 modality-aware prompt 改造成可解释的 evidence prompt，输出每个意图由哪种模态支持或冲突，并加入缺失模态训练。"
+    "what_can_be_done_next": [
+      {
+        "title": "标注最小充分模态",
+        "rationale": "论文指出模态可能互补也可能被文本主导，下一步需要知道每个样本真正需要哪些模态。",
+        "concrete_plan": "为样本标注最小充分模态集合，并训练带模态掩码的模型。",
+        "validation": "报告模态删除后的性能、校准和解释一致性。",
+        "expected_value": "建立可诊断的跨模态证据基线。",
+        "source": null
+      },
+      {
+        "title": "做反事实模态测试",
+        "rationale": "同一文本配不同图像或音频时意图可能变化，普通随机测试无法检验这种依赖。",
+        "concrete_plan": "构造同文本异模态、同模态异文本和冲突模态样本。",
+        "validation": "比较模型预测变化是否与人工意图变化一致。",
+        "expected_value": "测量模型是否真的使用了正确的上下文。",
+        "source": null
+      },
+      {
+        "title": "比较数据过滤策略",
+        "rationale": "human-centric filtering、去偏或知识库筛选会改变训练分布，收益不能只看最终准确率。",
+        "concrete_plan": "并列训练无过滤、规则过滤和模型过滤版本，固定模型与预算。",
+        "validation": "报告样本覆盖、类别分布、鲁棒性和人工质量评分。",
+        "expected_value": "判断数据工程改进是否可复现且不会丢失少数意图。",
+        "source": null
+      },
+      {
+        "title": "加入缺失模态部署评估",
+        "rationale": "真实助手经常缺少视频、音频或清晰图像，完整输入假设可能过强。",
+        "concrete_plan": "训练和测试时随机遮蔽模态，并加入简单补全基线。",
+        "validation": "按缺失组合报告性能、置信度和延迟。",
+        "expected_value": "提升系统在真实交互中的可用性。",
+        "source": null
+      }
+    ]
   },
   "original_abstract": "We introduce TCL-MAP, which aligns and fuses text, video and audio with modality-aware prompting and uses token-level contrastive learning on intent label tokens.",
   "bibtex": "@article{zhou2023tclmap, title={Token-Level Contrastive Learning with Modality-Aware Prompting for Multimodal Intent Recognition}, author={Zhou, Qianrui and Xu, Hua and Li, Hao and Zhang, Hanlei and Zhang, Xiaohan and Wang, Yifan and Gao, Kai}, journal={arXiv preprint arXiv:2312.14667}, year={2023}}",
   "figures": [],
   "evidence": [
-    {"claim": "MAP 使用相似度模态对齐和 cross-modality attention 融合文本、视频和音频。", "locator": "Abstract; Method", "url": "https://arxiv.org/abs/2312.14667"},
-    {"claim": "TCL 对标签 token 使用 NT-Xent loss。", "locator": "Abstract", "url": "https://arxiv.org/abs/2312.14667"}
+    {
+      "claim": "MAP 使用相似度模态对齐和 cross-modality attention 融合文本、视频和音频。",
+      "locator": "Abstract; Method",
+      "url": "https://arxiv.org/abs/2312.14667"
+    },
+    {
+      "claim": "TCL 对标签 token 使用 NT-Xent loss。",
+      "locator": "Abstract",
+      "url": "https://arxiv.org/abs/2312.14667"
+    }
   ],
   "generated_by": "6Yi Research Library bootstrap",
   "generated_at": "2026-09-17T08:00:00Z",

@@ -1,15 +1,42 @@
 {
   "id": "survey-multimodal-intent-recognition",
   "title": "A Survey on Multi-modal Intent Recognition: Recent Advances and New Frontiers",
-  "authors": ["Zhihong Zhu", "Fan Zhang", "Yunyan Zhang", "Jinghan Sun", "Zhiqi Huang", "Qingqing Long", "Bowen Xing", "Xian Wu"],
+  "authors": [
+    "Zhihong Zhu",
+    "Fan Zhang",
+    "Yunyan Zhang",
+    "Jinghan Sun",
+    "Zhiqi Huang",
+    "Qingqing Long",
+    "Bowen Xing",
+    "Xian Wu"
+  ],
   "year": 2025,
   "publication_date": "2025-11-04",
   "venue_or_source": "Findings of EMNLP",
   "venue_type": "Conference",
-  "ranking": {"ccf": null, "cas": null, "jcr": null, "ranking_year": null, "ranking_source": null},
-  "identifiers": {"doi": "10.18653/v1/2025.findings-emnlp.823", "arxiv": null, "openreview": null},
-  "urls": {"paper": "https://aclanthology.org/2025.findings-emnlp.823/", "code": null},
-  "topics": ["Survey", "Taxonomy", "Evaluation", "Future Directions"],
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": "10.18653/v1/2025.findings-emnlp.823",
+    "arxiv": null,
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://aclanthology.org/2025.findings-emnlp.823/",
+    "code": null
+  },
+  "topics": [
+    "Survey",
+    "Taxonomy",
+    "Evaluation",
+    "Future Directions"
+  ],
   "relevance": "High",
   "reading_basis": "official_html",
   "quick_read": {
@@ -20,32 +47,96 @@
     "why_it_matters": "它适合成为 6Yi 的阅读地图，帮助把 Paper Pool 按数据、模型、评测和应用建立结构化索引。"
   },
   "detail": {
-    "motivation": "多模态意图识别涉及语言、面部表情、姿态和声学等互补信号，但不同工作使用的 taxonomy、数据和指标差异较大，缺少统一入口。",
+    "motivation": "多模态意图识别涉及语言、面部表情、姿态和声学等互补信号，但不同工作使用的 taxonomy、数据和指标差异较大，缺少统一入口。\n\n多模态意图识别的核心难点是不同模态提供的证据可能互补，也可能互相冲突。只看文本会高估系统能力，只看融合后的总分又无法判断模型到底使用了哪种证据。",
     "contributions": [
-      {"contribution": "首次系统覆盖 MIR 的文本、视觉和声学信号，并整理数据集与方法谱系。", "source": "Abstract; Introduction"},
-      {"contribution": "建立涵盖评测协议与先进方法的统一 taxonomy，并给出三个 leaderboard。", "source": "Abstract; Taxonomy"},
-      {"contribution": "总结多任务、多领域、多语言等前沿方向，汇总论文、数据与 leaderboard 资源。", "source": "Abstract; Future Directions"}
+      {
+        "contribution": "首次系统覆盖 MIR 的文本、视觉和声学信号，并整理数据集与方法谱系。",
+        "source": "Abstract; Introduction"
+      },
+      {
+        "contribution": "建立涵盖评测协议与先进方法的统一 taxonomy，并给出三个 leaderboard。",
+        "source": "Abstract; Taxonomy"
+      },
+      {
+        "contribution": "总结多任务、多领域、多语言等前沿方向，汇总论文、数据与 leaderboard 资源。",
+        "source": "Abstract; Future Directions"
+      }
     ],
     "research_questions": [
-      {"type": "inferred", "question": "如何用统一的 taxonomy 和评测协议比较不同模态、数据集与方法？", "original_question": null, "how": "按信号类型、任务设定、指标和模型方法组织文献，并构建 leaderboard 与资源表。", "answer": "综述给出了一套统一框架，同时指出多任务、多领域和多语言仍是重要发展方向。", "meaning": "6Yi 的文献库应把评测协议和数据属性作为一等索引，而不是只按模型名称归档。", "source": "Introduction/Motivation"}
+      {
+        "type": "inferred",
+        "question": "如何用统一的 taxonomy 和评测协议比较不同模态、数据集与方法？",
+        "original_question": null,
+        "how": "按信号类型、任务设定、指标和模型方法组织文献，并构建 leaderboard 与资源表。\n\n作者通过单模态/多模态对照、模态遮蔽、人工评估或去偏测试，检查模型是否真的使用了视觉和音频证据。",
+        "answer": "综述给出了一套统一框架，同时指出多任务、多领域和多语言仍是重要发展方向。\n\n结果说明模态互补性、数据过滤和标签语义会影响意图识别，但文本偏置或模态缺失可能掩盖真实能力。",
+        "meaning": "6Yi 的文献库应把评测协议和数据属性作为一等索引，而不是只按模型名称归档。\n\n后续研究应先验证样本是否需要某种模态，再比较融合结构；整体准确率不能替代证据层面的诊断。",
+        "source": "Introduction/Motivation"
+      }
     ],
     "research_questions_empty_reason": null,
     "research_questions_empty_source": null,
-    "method": "综述以文本、视觉/视频、声学等输入信号为轴，结合 evaluation protocol、先进方法、数据资源和开放问题建立统一分类框架。",
-    "experiments_and_key_findings": "作为综述论文，其主要产出是方法与资源的系统整理、统一 taxonomy 和 leaderboard，而非单一模型实验。",
+    "method": "综述以文本、视觉/视频、声学等输入信号为轴，结合 evaluation protocol、先进方法、数据资源和开放问题建立统一分类框架。\n\n应按“各模态输入—对齐或过滤—融合/蒸馏—意图预测”的顺序展开，并说明标签、提示或知识库在流程中的位置。这样才能区分数据构建贡献、融合结构贡献和训练目标贡献。",
+    "experiments_and_key_findings": "作为综述论文，其主要产出是方法与资源的系统整理、统一 taxonomy 和 leaderboard，而非单一模型实验。\n\n实验需要同时比较单模态、融合模型和人类或强基线，并检查缺失模态、模态冲突及不同随机种子。若文本模型已经很强，融合模型的增益必须通过受控样本证明，而不能只看总体准确率。",
     "limitations": {
-      "author_reported": ["综述依赖已有公开研究与资源，领域快速变化会带来覆盖滞后。", "不同数据集的标签和指标仍可能难以完全对齐。"],
-      "ai_analysis": ["leaderboard 需要持续记录数据版本、模态可用性和预训练数据污染。", "未来可进一步纳入可解释性、鲁棒性与真实交互成本指标。"]
+      "author_reported": [
+        "综述依赖已有公开研究与资源，领域快速变化会带来覆盖滞后。",
+        "不同数据集的标签和指标仍可能难以完全对齐。"
+      ],
+      "ai_analysis": [
+        "leaderboard 需要持续记录数据版本、模态可用性和预训练数据污染。",
+        "未来可进一步纳入可解释性、鲁棒性与真实交互成本指标。"
+      ]
     },
     "relation_to_research": "这篇综述是 6Yi Research Library 的导航论文，可用于设计主题 taxonomy、每日推荐策略和后续阅读优先级。",
-    "what_can_be_done_next": "据综述框架重构 Paper Pool 标签，建立数据集、融合、prompt/LLM、偏置诊断与应用五条浏览路径。"
+    "what_can_be_done_next": [
+      {
+        "title": "标注最小充分模态",
+        "rationale": "论文指出模态可能互补也可能被文本主导，下一步需要知道每个样本真正需要哪些模态。",
+        "concrete_plan": "为样本标注最小充分模态集合，并训练带模态掩码的模型。",
+        "validation": "报告模态删除后的性能、校准和解释一致性。",
+        "expected_value": "建立可诊断的跨模态证据基线。",
+        "source": null
+      },
+      {
+        "title": "做反事实模态测试",
+        "rationale": "同一文本配不同图像或音频时意图可能变化，普通随机测试无法检验这种依赖。",
+        "concrete_plan": "构造同文本异模态、同模态异文本和冲突模态样本。",
+        "validation": "比较模型预测变化是否与人工意图变化一致。",
+        "expected_value": "测量模型是否真的使用了正确的上下文。",
+        "source": null
+      },
+      {
+        "title": "比较数据过滤策略",
+        "rationale": "human-centric filtering、去偏或知识库筛选会改变训练分布，收益不能只看最终准确率。",
+        "concrete_plan": "并列训练无过滤、规则过滤和模型过滤版本，固定模型与预算。",
+        "validation": "报告样本覆盖、类别分布、鲁棒性和人工质量评分。",
+        "expected_value": "判断数据工程改进是否可复现且不会丢失少数意图。",
+        "source": null
+      },
+      {
+        "title": "加入缺失模态部署评估",
+        "rationale": "真实助手经常缺少视频、音频或清晰图像，完整输入假设可能过强。",
+        "concrete_plan": "训练和测试时随机遮蔽模态，并加入简单补全基线。",
+        "validation": "按缺失组合报告性能、置信度和延迟。",
+        "expected_value": "提升系统在真实交互中的可用性。",
+        "source": null
+      }
+    ]
   },
   "original_abstract": "This survey reviews multimodal intent recognition across textual, visual and acoustic signals, proposes a unified taxonomy and evaluation framework, discusses emerging frontiers, and collects open-source resources.",
   "bibtex": "@inproceedings{zhu-etal-2025-survey, title={A Survey on Multi-modal Intent Recognition: Recent Advances and New Frontiers}, author={Zhu, Zhihong and Zhang, Fan and Zhang, Yunyan and Sun, Jinghan and Huang, Zhiqi and Long, Qingqing and Xing, Bowen and Wu, Xian}, booktitle={Findings of EMNLP}, year={2025}, doi={10.18653/v1/2025.findings-emnlp.823}}",
   "figures": [],
   "evidence": [
-    {"claim": "综述覆盖 textual、visual/image-video 和 acoustic signals。", "locator": "Abstract", "url": "https://aclanthology.org/2025.findings-emnlp.823/"},
-    {"claim": "论文提出统一 taxonomy、评测框架并汇总开放资源。", "locator": "Abstract; Contributions", "url": "https://aclanthology.org/2025.findings-emnlp.823/"}
+    {
+      "claim": "综述覆盖 textual、visual/image-video 和 acoustic signals。",
+      "locator": "Abstract",
+      "url": "https://aclanthology.org/2025.findings-emnlp.823/"
+    },
+    {
+      "claim": "论文提出统一 taxonomy、评测框架并汇总开放资源。",
+      "locator": "Abstract; Contributions",
+      "url": "https://aclanthology.org/2025.findings-emnlp.823/"
+    }
   ],
   "generated_by": "6Yi Research Library bootstrap",
   "generated_at": "2026-09-17T08:00:00Z",

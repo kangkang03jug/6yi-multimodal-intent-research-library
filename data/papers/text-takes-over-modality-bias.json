@@ -1,15 +1,38 @@
 {
   "id": "text-takes-over-modality-bias",
   "title": "Text Takes Over: A Study of Modality Bias in Multimodal Intent Detection",
-  "authors": ["Ankan Mullick", "Saransh Sharma", "Abhik Jana", "Pawan Goyal"],
+  "authors": [
+    "Ankan Mullick",
+    "Saransh Sharma",
+    "Abhik Jana",
+    "Pawan Goyal"
+  ],
   "year": 2025,
   "publication_date": "2025-11-04",
   "venue_or_source": "EMNLP",
   "venue_type": "Conference",
-  "ranking": {"ccf": null, "cas": null, "jcr": null, "ranking_year": null, "ranking_source": null},
-  "identifiers": {"doi": "10.18653/v1/2025.emnlp-main.1226", "arxiv": null, "openreview": null},
-  "urls": {"paper": "https://aclanthology.org/2025.emnlp-main.1226/", "code": "https://github.com/Text-Takes-Over-EMNLP-2025/MultiModal-Intent-EMNLP-2025"},
-  "topics": ["Modality Bias", "Dataset Diagnostics", "MIntRec", "Evaluation"],
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": "10.18653/v1/2025.emnlp-main.1226",
+    "arxiv": null,
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://aclanthology.org/2025.emnlp-main.1226/",
+    "code": "https://github.com/Text-Takes-Over-EMNLP-2025/MultiModal-Intent-EMNLP-2025"
+  },
+  "topics": [
+    "Modality Bias",
+    "Dataset Diagnostics",
+    "MIntRec",
+    "Evaluation"
+  ],
   "relevance": "High",
   "reading_basis": "official_html",
   "quick_read": {
@@ -20,32 +43,96 @@
     "why_it_matters": "它直接提醒 6Yi：先验证数据是否真正需要多模态，再讨论模型融合是否有效。"
   },
   "detail": {
-    "motivation": "多模态意图检测的 benchmark 若被文本线索主导，模型可以忽略视觉和音频仍获得高分，进而掩盖真正的跨模态理解问题。",
+    "motivation": "多模态意图检测的 benchmark 若被文本线索主导，模型可以忽略视觉和音频仍获得高分，进而掩盖真正的跨模态理解问题。\n\n多模态意图识别的核心难点是不同模态提供的证据可能互补，也可能互相冲突。只看文本会高估系统能力，只看融合后的总分又无法判断模型到底使用了哪种证据。",
     "contributions": [
-      {"contribution": "系统比较 LLM、非 LLM、text-only 和 multimodal 模型在 MIntRec 数据上的表现。", "source": "Abstract; Introduction"},
-      {"contribution": "通过人类评估确认数据集存在文本偏置，并量化不同样本对模态的依赖。", "source": "Abstract; Human Evaluation"},
-      {"contribution": "提出数据去偏框架，分析去偏后模型性能和模态贡献的变化。", "source": "Abstract; Debiasing"}
+      {
+        "contribution": "系统比较 LLM、非 LLM、text-only 和 multimodal 模型在 MIntRec 数据上的表现。",
+        "source": "Abstract; Introduction"
+      },
+      {
+        "contribution": "通过人类评估确认数据集存在文本偏置，并量化不同样本对模态的依赖。",
+        "source": "Abstract; Human Evaluation"
+      },
+      {
+        "contribution": "提出数据去偏框架，分析去偏后模型性能和模态贡献的变化。",
+        "source": "Abstract; Debiasing"
+      }
     ],
     "research_questions": [
-      {"type": "inferred", "question": "现有多模态意图数据集是否真正要求模型使用非文本模态？", "original_question": null, "how": "比较文本模型和多模态模型，并用人类评估及去偏数据集检验模态依赖。", "answer": "不完全是；超过 90% 的样本需要文本输入，文本偏置显著影响模型比较。", "meaning": "多模态研究的第一层评测应报告 modality necessity 与 bias，而不仅是平均准确率。", "source": "Introduction/Motivation"}
+      {
+        "type": "inferred",
+        "question": "现有多模态意图数据集是否真正要求模型使用非文本模态？",
+        "original_question": null,
+        "how": "比较文本模型和多模态模型，并用人类评估及去偏数据集检验模态依赖。\n\n作者通过单模态/多模态对照、模态遮蔽、人工评估或去偏测试，检查模型是否真的使用了视觉和音频证据。",
+        "answer": "不完全是；超过 90% 的样本需要文本输入，文本偏置显著影响模型比较。\n\n结果说明模态互补性、数据过滤和标签语义会影响意图识别，但文本偏置或模态缺失可能掩盖真实能力。",
+        "meaning": "多模态研究的第一层评测应报告 modality necessity 与 bias，而不仅是平均准确率。\n\n后续研究应先验证样本是否需要某种模态，再比较融合结构；整体准确率不能替代证据层面的诊断。",
+        "source": "Introduction/Motivation"
+      }
     ],
     "research_questions_empty_reason": null,
     "research_questions_empty_source": null,
-    "method": "作者在 MIntRec-1 和 MIntRec2.0 上对比不同模型，识别样本的模态需求，以人工评估确认偏置，再移除高度文本依赖样本并观察模型性能变化。",
-    "experiments_and_key_findings": "文本模型 Mistral-7B 在两个数据集上分别约领先 9% 和 4%；去偏后 MIntRec-1 超过 70%、MIntRec2.0 超过 50% 的样本被移除，小型融合模型准确率下降超过 50–60%。",
+    "method": "作者在 MIntRec-1 和 MIntRec2.0 上对比不同模型，识别样本的模态需求，以人工评估确认偏置，再移除高度文本依赖样本并观察模型性能变化。\n\n应按“各模态输入—对齐或过滤—融合/蒸馏—意图预测”的顺序展开，并说明标签、提示或知识库在流程中的位置。这样才能区分数据构建贡献、融合结构贡献和训练目标贡献。",
+    "experiments_and_key_findings": "文本模型 Mistral-7B 在两个数据集上分别约领先 9% 和 4%；去偏后 MIntRec-1 超过 70%、MIntRec2.0 超过 50% 的样本被移除，小型融合模型准确率下降超过 50–60%。\n\n实验需要同时比较单模态、融合模型和人类或强基线，并检查缺失模态、模态冲突及不同随机种子。若文本模型已经很强，融合模型的增益必须通过受控样本证明，而不能只看总体准确率。",
     "limitations": {
-      "author_reported": ["去偏规则会删除大量样本，可能降低 benchmark 的覆盖范围。", "结论主要基于 MIntRec 系列，其他数据集仍需独立验证。"],
-      "ai_analysis": ["需要区分文本偏置、标签泄漏和语言模型先验三种因素。", "建议增加 modality counterfactual 和模态遮挡协议，避免仅依赖过滤后的数据规模。"]
+      "author_reported": [
+        "去偏规则会删除大量样本，可能降低 benchmark 的覆盖范围。",
+        "结论主要基于 MIntRec 系列，其他数据集仍需独立验证。"
+      ],
+      "ai_analysis": [
+        "需要区分文本偏置、标签泄漏和语言模型先验三种因素。",
+        "建议增加 modality counterfactual 和模态遮挡协议，避免仅依赖过滤后的数据规模。"
+      ]
     },
     "relation_to_research": "这是 6Yi 研究方向的关键诊断论文，适合放在 Paper Pool 的评测与数据质量入口，约束后续融合模型的结论。",
-    "what_can_be_done_next": "为每个样本标注最小充分模态集合，建立 modality-necessity leaderboard，并复现去偏前后的模型与人类差距。"
+    "what_can_be_done_next": [
+      {
+        "title": "标注最小充分模态",
+        "rationale": "论文指出模态可能互补也可能被文本主导，下一步需要知道每个样本真正需要哪些模态。",
+        "concrete_plan": "为样本标注最小充分模态集合，并训练带模态掩码的模型。",
+        "validation": "报告模态删除后的性能、校准和解释一致性。",
+        "expected_value": "建立可诊断的跨模态证据基线。",
+        "source": null
+      },
+      {
+        "title": "做反事实模态测试",
+        "rationale": "同一文本配不同图像或音频时意图可能变化，普通随机测试无法检验这种依赖。",
+        "concrete_plan": "构造同文本异模态、同模态异文本和冲突模态样本。",
+        "validation": "比较模型预测变化是否与人工意图变化一致。",
+        "expected_value": "测量模型是否真的使用了正确的上下文。",
+        "source": null
+      },
+      {
+        "title": "比较数据过滤策略",
+        "rationale": "human-centric filtering、去偏或知识库筛选会改变训练分布，收益不能只看最终准确率。",
+        "concrete_plan": "并列训练无过滤、规则过滤和模型过滤版本，固定模型与预算。",
+        "validation": "报告样本覆盖、类别分布、鲁棒性和人工质量评分。",
+        "expected_value": "判断数据工程改进是否可复现且不会丢失少数意图。",
+        "source": null
+      },
+      {
+        "title": "加入缺失模态部署评估",
+        "rationale": "真实助手经常缺少视频、音频或清晰图像，完整输入假设可能过强。",
+        "concrete_plan": "训练和测试时随机遮蔽模态，并加入简单补全基线。",
+        "validation": "按缺失组合报告性能、置信度和延迟。",
+        "expected_value": "提升系统在真实交互中的可用性。",
+        "source": null
+      }
+    ]
   },
   "original_abstract": "This work studies modality bias in multimodal intent detection and finds that a text-only Mistral-7B outperforms most multimodal models on MIntRec-1 and MIntRec2.0, motivating debiased evaluation.",
   "bibtex": "@inproceedings{mullick-etal-2025-text, title={Text Takes Over: A Study of Modality Bias in Multimodal Intent Detection}, author={Mullick, Ankan and Sharma, Saransh and Jana, Abhik and Goyal, Pawan}, booktitle={EMNLP}, year={2025}, doi={10.18653/v1/2025.emnlp-main.1226}}",
   "figures": [],
   "evidence": [
-    {"claim": "Mistral-7B 在 MIntRec-1 和 MIntRec2.0 上约领先 9% 和 4%。", "locator": "Abstract", "url": "https://aclanthology.org/2025.emnlp-main.1226/"},
-    {"claim": "超过 90% 的样本需要文本输入，去偏后大量样本被移除。", "locator": "Abstract; Findings", "url": "https://aclanthology.org/2025.emnlp-main.1226/"}
+    {
+      "claim": "Mistral-7B 在 MIntRec-1 和 MIntRec2.0 上约领先 9% 和 4%。",
+      "locator": "Abstract",
+      "url": "https://aclanthology.org/2025.emnlp-main.1226/"
+    },
+    {
+      "claim": "超过 90% 的样本需要文本输入，去偏后大量样本被移除。",
+      "locator": "Abstract; Findings",
+      "url": "https://aclanthology.org/2025.emnlp-main.1226/"
+    }
   ],
   "generated_by": "6Yi Research Library bootstrap",
   "generated_at": "2026-09-17T08:00:00Z",

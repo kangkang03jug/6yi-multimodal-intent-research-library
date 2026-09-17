@@ -101,7 +101,24 @@ const paperSchema = z
         ai_analysis: z.array(z.string()),
       }),
       relation_to_research: z.string(),
-      what_can_be_done_next: z.string(),
+      what_can_be_done_next: z.union([
+        z.string().trim().min(1),
+        z
+          .array(
+            z
+              .object({
+                title: z.string().trim().min(1),
+                rationale: z.string().trim().min(1),
+                concrete_plan: z.string().trim().min(1),
+                validation: z.string().trim().min(1),
+                expected_value: z.string().trim().min(1),
+                source: z.string().trim().min(1).nullable().optional(),
+              })
+              .strict(),
+          )
+          .min(3)
+          .max(6),
+      ]),
     }),
     original_abstract: z.string().nullable(),
     bibtex: z.string().nullable(),
@@ -218,8 +235,18 @@ const summaryFields = (paper) => [
     'method',
     'experiments_and_key_findings',
     'relation_to_research',
-    'what_can_be_done_next',
   ].map((name) => [`detail.${name}`, paper.detail[name]]),
+  ...(typeof paper.detail.what_can_be_done_next === 'string'
+    ? [['detail.what_can_be_done_next', paper.detail.what_can_be_done_next]]
+    : []),
+  ...(Array.isArray(paper.detail.what_can_be_done_next)
+    ? paper.detail.what_can_be_done_next.flatMap((step, index) =>
+        ['title', 'rationale', 'concrete_plan', 'validation', 'expected_value'].map((name) => [
+          `detail.what_can_be_done_next[${index}].${name}`,
+          step[name],
+        ]),
+      )
+    : []),
   ...paper.detail.research_questions.flatMap((question, index) =>
     ['question', 'how', 'answer', 'meaning'].map((name) => [
       `detail.research_questions[${index}].${name}`,

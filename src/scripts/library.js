@@ -28,12 +28,7 @@ import { localStateStorageKey, parseLocalState, serializeLocalState } from '../l
   });
   const updateLocalIndicators = () => {
     rows.forEach((row) => {
-      const id = row
-        .querySelector('a[href*="/papers/"]')
-        ?.getAttribute('href')
-        ?.split('/')
-        .filter(Boolean)
-        .pop();
+      const id = row.querySelector('a[href*="/papers/"]')?.getAttribute('href')?.split('/').filter(Boolean).pop();
       if (!id) return;
       const value = paperLocalState(id);
       row.dataset.deepRead = String(value.deep_read);
@@ -186,17 +181,10 @@ import { localStateStorageKey, parseLocalState, serializeLocalState } from '../l
     updateLocalIndicators();
     const filter = localFilter?.dataset.localStateFilter;
     if (filter) {
-      const visible = rows.filter(
-        (row) => row.dataset[filter === 'deep_read' ? 'deepRead' : 'favorite'] === 'true',
-      );
-      rows.forEach((row) => {
-        row.hidden = !visible.includes(row);
-      });
+      const visible = rows.filter((row) => row.dataset[filter === 'deep_read' ? 'deepRead' : 'favorite'] === 'true');
+      rows.forEach((row) => { row.hidden = !visible.includes(row); });
       const count = q('[data-local-count]');
-      if (count) {
-        count.dataset.countValue = visible.length;
-        count.textContent = formatCount(visible.length, 'paper');
-      }
+      if (count) { count.dataset.countValue = visible.length; count.textContent = formatCount(visible.length, 'paper'); }
       if (localEmpty) localEmpty.hidden = visible.length > 0;
     }
     const paperIds = [...document.querySelectorAll('[data-local-paper-ids] [data-paper-id]')].map(
@@ -335,6 +323,11 @@ import { localStateStorageKey, parseLocalState, serializeLocalState } from '../l
         null,
         2,
       );
+      q('[data-detail-next]', editor).value = JSON.stringify(
+        paperRecord.detail.what_can_be_done_next,
+        null,
+        2,
+      );
       editor.querySelectorAll('[data-limitations]').forEach((field) => {
         field.value = paperRecord.detail.limitations[field.dataset.limitations].join('\n');
       });
@@ -468,6 +461,7 @@ import { localStateStorageKey, parseLocalState, serializeLocalState } from '../l
           const contributions = JSON.parse(q('[data-contributions]', editor).value);
           if (!Array.isArray(contributions)) throw new Error('Contributions must be an array');
           detailPatch.contributions = contributions;
+          detailPatch.what_can_be_done_next = JSON.parse(q('[data-detail-next]', editor).value);
           detailPatch.limitations = {
             author_reported: splitLines(q('[data-limitations="author_reported"]', editor).value),
             ai_analysis: splitLines(q('[data-limitations="ai_analysis"]', editor).value),

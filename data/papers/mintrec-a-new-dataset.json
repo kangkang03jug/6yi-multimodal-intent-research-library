@@ -1,15 +1,40 @@
 {
   "id": "mintrec-a-new-dataset",
   "title": "MIntRec: A New Dataset for Multimodal Intent Recognition",
-  "authors": ["Hanlei Zhang", "Hua Xu", "Xin Wang", "Qianrui Zhou", "Shaojie Zhao", "Jiayan Teng"],
+  "authors": [
+    "Hanlei Zhang",
+    "Hua Xu",
+    "Xin Wang",
+    "Qianrui Zhou",
+    "Shaojie Zhao",
+    "Jiayan Teng"
+  ],
   "year": 2022,
   "publication_date": "2022-10-10",
   "venue_or_source": "ACM Multimedia",
   "venue_type": "Conference",
-  "ranking": {"ccf": null, "cas": null, "jcr": null, "ranking_year": null, "ranking_source": null},
-  "identifiers": {"doi": "10.1145/3503161.3547906", "arxiv": "2209.04355", "openreview": null},
-  "urls": {"paper": "https://arxiv.org/abs/2209.04355", "code": "https://github.com/thuiar/MIntRec"},
-  "topics": ["Dataset", "Intent Taxonomy", "Text-Video-Audio", "Multimodal Fusion"],
+  "ranking": {
+    "ccf": null,
+    "cas": null,
+    "jcr": null,
+    "ranking_year": null,
+    "ranking_source": null
+  },
+  "identifiers": {
+    "doi": "10.1145/3503161.3547906",
+    "arxiv": "2209.04355",
+    "openreview": null
+  },
+  "urls": {
+    "paper": "https://arxiv.org/abs/2209.04355",
+    "code": "https://github.com/thuiar/MIntRec"
+  },
+  "topics": [
+    "Dataset",
+    "Intent Taxonomy",
+    "Text-Video-Audio",
+    "Multimodal Fusion"
+  ],
   "relevance": "High",
   "reading_basis": "official_html",
   "quick_read": {
@@ -20,32 +45,96 @@
     "why_it_matters": "它把多模态意图识别从概念推进到可复现的 benchmark，适合作为 6Yi 研究方向的数据与评测起点。"
   },
   "detail": {
-    "motivation": "真实对话中的意图往往同时由语言内容、说话方式和视觉行为表达。若 benchmark 只保留文本，模型的跨模态推理能力就难以被区分和诊断。",
+    "motivation": "真实对话中的意图往往同时由语言内容、说话方式和视觉行为表达。若 benchmark 只保留文本，模型的跨模态推理能力就难以被区分和诊断。\n\n多模态意图识别的核心难点是不同模态提供的证据可能互补，也可能互相冲突。只看文本会高估系统能力，只看融合后的总分又无法判断模型到底使用了哪种证据。",
     "contributions": [
-      {"contribution": "提出包含文本、视频、音频及多模态意图标注的 MIntRec 数据集，共 2,224 个高质量样本。", "source": "Abstract; Introduction"},
-      {"contribution": "建立粗粒度与 20 类细粒度意图 taxonomy，并提供说话人 bounding box 标注。", "source": "Abstract; Contributions"},
-      {"contribution": "用三类多模态融合方法构建基线，展示非语言模态的增益与任务难度。", "source": "Abstract; Experiments"}
+      {
+        "contribution": "提出包含文本、视频、音频及多模态意图标注的 MIntRec 数据集，共 2,224 个高质量样本。",
+        "source": "Abstract; Introduction"
+      },
+      {
+        "contribution": "建立粗粒度与 20 类细粒度意图 taxonomy，并提供说话人 bounding box 标注。",
+        "source": "Abstract; Contributions"
+      },
+      {
+        "contribution": "用三类多模态融合方法构建基线，展示非语言模态的增益与任务难度。",
+        "source": "Abstract; Experiments"
+      }
     ],
     "research_questions": [
-      {"type": "inferred", "question": "在真实多模态场景中，视频与音频信息能否稳定提升意图识别？", "original_question": null, "how": "比较 text-only 与加入非语言模态的融合基线，并观察跨模态交互效果。", "answer": "能；作者报告非语言模态相对 text-only 带来 substantial improvements。", "meaning": "后续研究应把模态互补性作为核心实验变量，而不是只报告整体 accuracy。", "source": "Introduction/Motivation"}
+      {
+        "type": "inferred",
+        "question": "在真实多模态场景中，视频与音频信息能否稳定提升意图识别？",
+        "original_question": null,
+        "how": "比较 text-only 与加入非语言模态的融合基线，并观察跨模态交互效果。\n\n作者通过单模态/多模态对照、模态遮蔽、人工评估或去偏测试，检查模型是否真的使用了视觉和音频证据。",
+        "answer": "能；作者报告非语言模态相对 text-only 带来 substantial improvements。\n\n结果说明模态互补性、数据过滤和标签语义会影响意图识别，但文本偏置或模态缺失可能掩盖真实能力。",
+        "meaning": "后续研究应把模态互补性作为核心实验变量，而不是只报告整体 accuracy。\n\n后续研究应先验证样本是否需要某种模态，再比较融合结构；整体准确率不能替代证据层面的诊断。",
+        "source": "Introduction/Motivation"
+      }
     ],
     "research_questions_empty_reason": null,
     "research_questions_empty_source": null,
-    "method": "数据来自 Superstore 电视剧片段，包含 utterance、视频、音频和意图标签；作者抽取各模态特征，并适配三种多模态融合方法作为基线，同时提供说话人定位标注。",
-    "experiments_and_key_findings": "跨模态基线显示非语言信号可有效增强识别，但模型与人类之间仍有明显差距，说明细粒度意图和模态冲突仍然困难。",
+    "method": "数据来自 Superstore 电视剧片段，包含 utterance、视频、音频和意图标签；作者抽取各模态特征，并适配三种多模态融合方法作为基线，同时提供说话人定位标注。\n\n应按“各模态输入—对齐或过滤—融合/蒸馏—意图预测”的顺序展开，并说明标签、提示或知识库在流程中的位置。这样才能区分数据构建贡献、融合结构贡献和训练目标贡献。",
+    "experiments_and_key_findings": "跨模态基线显示非语言信号可有效增强识别，但模型与人类之间仍有明显差距，说明细粒度意图和模态冲突仍然困难。\n\n实验需要同时比较单模态、融合模型和人类或强基线，并检查缺失模态、模态冲突及不同随机种子。若文本模型已经很强，融合模型的增益必须通过受控样本证明，而不能只看总体准确率。",
     "limitations": {
-      "author_reported": ["数据源于单一电视剧语境，领域迁移能力需要进一步验证。", "模型与人类表现仍有差距，任务尚未被充分解决。"],
-      "ai_analysis": ["应增加按模态可靠性、说话人和意图类别分层的诊断集。", "影视对话中的社会关系与表演性可能与真实用户交互存在分布差异。"]
+      "author_reported": [
+        "数据源于单一电视剧语境，领域迁移能力需要进一步验证。",
+        "模型与人类表现仍有差距，任务尚未被充分解决。"
+      ],
+      "ai_analysis": [
+        "应增加按模态可靠性、说话人和意图类别分层的诊断集。",
+        "影视对话中的社会关系与表演性可能与真实用户交互存在分布差异。"
+      ]
     },
     "relation_to_research": "这是多模态意图识别最重要的 benchmark 基础之一，可用于构建 6Yi 的数据理解、融合方法和误差分析主线。",
-    "what_can_be_done_next": "基于 MIntRec 复现实验，加入 modality dropout、冲突样本和 calibration 评测，并将结果与后续方法在相同 taxonomy 下对齐。"
+    "what_can_be_done_next": [
+      {
+        "title": "标注最小充分模态",
+        "rationale": "论文指出模态可能互补也可能被文本主导，下一步需要知道每个样本真正需要哪些模态。",
+        "concrete_plan": "为样本标注最小充分模态集合，并训练带模态掩码的模型。",
+        "validation": "报告模态删除后的性能、校准和解释一致性。",
+        "expected_value": "建立可诊断的跨模态证据基线。",
+        "source": null
+      },
+      {
+        "title": "做反事实模态测试",
+        "rationale": "同一文本配不同图像或音频时意图可能变化，普通随机测试无法检验这种依赖。",
+        "concrete_plan": "构造同文本异模态、同模态异文本和冲突模态样本。",
+        "validation": "比较模型预测变化是否与人工意图变化一致。",
+        "expected_value": "测量模型是否真的使用了正确的上下文。",
+        "source": null
+      },
+      {
+        "title": "比较数据过滤策略",
+        "rationale": "human-centric filtering、去偏或知识库筛选会改变训练分布，收益不能只看最终准确率。",
+        "concrete_plan": "并列训练无过滤、规则过滤和模型过滤版本，固定模型与预算。",
+        "validation": "报告样本覆盖、类别分布、鲁棒性和人工质量评分。",
+        "expected_value": "判断数据工程改进是否可复现且不会丢失少数意图。",
+        "source": null
+      },
+      {
+        "title": "加入缺失模态部署评估",
+        "rationale": "真实助手经常缺少视频、音频或清晰图像，完整输入假设可能过强。",
+        "concrete_plan": "训练和测试时随机遮蔽模态，并加入简单补全基线。",
+        "validation": "按缺失组合报告性能、置信度和延迟。",
+        "expected_value": "提升系统在真实交互中的可用性。",
+        "source": null
+      }
+    ]
   },
   "original_abstract": "Multimodal intent recognition is a significant task for understanding human language in real-world multimodal scenes. This paper introduces MIntRec, a dataset with 2,224 samples, text, video, audio, twenty fine-grained intent categories, and multimodal annotations.",
   "bibtex": "@inproceedings{zhang2022mintrec, title={MIntRec: A New Dataset for Multimodal Intent Recognition}, author={Zhang, Hanlei and Xu, Hua and Wang, Xin and Zhou, Qianrui and Zhao, Shaojie and Teng, Jiayan}, booktitle={ACM Multimedia}, year={2022}, doi={10.1145/3503161.3547906}}",
   "figures": [],
   "evidence": [
-    {"claim": "数据集包含 2,224 个样本、文本视频音频和 20 类细粒度意图。", "locator": "Abstract", "url": "https://arxiv.org/abs/2209.04355"},
-    {"claim": "非语言模态相较 text-only 带来明显提升。", "locator": "Abstract; Experiments", "url": "https://arxiv.org/abs/2209.04355"}
+    {
+      "claim": "数据集包含 2,224 个样本、文本视频音频和 20 类细粒度意图。",
+      "locator": "Abstract",
+      "url": "https://arxiv.org/abs/2209.04355"
+    },
+    {
+      "claim": "非语言模态相较 text-only 带来明显提升。",
+      "locator": "Abstract; Experiments",
+      "url": "https://arxiv.org/abs/2209.04355"
+    }
   ],
   "generated_by": "6Yi Research Library bootstrap",
   "generated_at": "2026-09-17T08:00:00Z",

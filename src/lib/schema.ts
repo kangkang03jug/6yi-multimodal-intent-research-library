@@ -16,6 +16,17 @@ export const ReadingBasis = z.enum([
   'abstract_and_metadata',
   'abstract_only',
 ]);
+export const DetailNextStepSchema = z
+  .object({
+    title: z.string().trim().min(1),
+    rationale: z.string().trim().min(1),
+    concrete_plan: z.string().trim().min(1),
+    validation: z.string().trim().min(1),
+    expected_value: z.string().trim().min(1),
+    source: z.string().trim().min(1).nullable().optional(),
+  })
+  .strict();
+export type DetailNextStep = z.infer<typeof DetailNextStepSchema>;
 
 const ResearchQuestionsEmptyReason = z
   .string()
@@ -112,7 +123,10 @@ export const PaperSchema = z
         ai_analysis: z.array(z.string()),
       }),
       relation_to_research: z.string(),
-      what_can_be_done_next: z.string(),
+      what_can_be_done_next: z.union([
+        z.string().trim().min(1),
+        z.array(DetailNextStepSchema).min(3).max(6),
+      ]),
     }),
     original_abstract: z.string().nullable(),
     bibtex: z.string().nullable(),

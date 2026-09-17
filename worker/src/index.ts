@@ -362,6 +362,32 @@ function validContributions(value: unknown) {
     )
   );
 }
+function validNextSteps(value: unknown) {
+  if (typeof value === 'string') return value.trim().length > 0;
+  return (
+    Array.isArray(value) &&
+    value.length >= 3 &&
+    value.length <= 6 &&
+    value.every(
+      (step) =>
+        isObject(step) &&
+        hasOnlyKeys(step, [
+          'title',
+          'rationale',
+          'concrete_plan',
+          'validation',
+          'expected_value',
+          'source',
+        ]) &&
+        ['title', 'rationale', 'concrete_plan', 'validation', 'expected_value'].every(
+          (key) => typeof step[key] === 'string' && step[key].trim().length > 0,
+        ) &&
+        (step.source === undefined ||
+          step.source === null ||
+          (typeof step.source === 'string' && step.source.trim().length > 0)),
+    )
+  );
+}
 function validResearchQuestionsEmptyReason(value: unknown) {
   return (
     typeof value === 'string' &&
@@ -408,8 +434,8 @@ function validDetail(value: unknown, readingBasis?: unknown) {
       'method',
       'experiments_and_key_findings',
       'relation_to_research',
-      'what_can_be_done_next',
     ].every((key) => typeof value[key] === 'string') &&
+    validNextSteps(value.what_can_be_done_next) &&
     validContributions(value.contributions) &&
     validResearchQuestions(value.research_questions) &&
     hasValidResearchQuestionMetadata &&

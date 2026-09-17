@@ -252,3 +252,22 @@ describe('browser-local reading state', () => {
     expect(parseLocalState('[]')).toEqual({});
   });
 });
+
+describe('structured Detail follow-up directions', () => {
+  it('accepts three paper-specific next-step objects while keeping legacy strings readable', () => {
+    const steps = Array.from({ length: 3 }, (_, index) => ({
+      title: `方向 ${index + 1}`,
+      rationale: '来自本文方法与实验中的具体限制。',
+      concrete_plan: '沿用本文数据和基线完成受控实验。',
+      validation: '使用论文报告的指标并补充多次随机种子。',
+      expected_value: '确认该方向能否改善本文指出的问题。',
+      source: 'Introduction, Sec. 1',
+    }));
+    const structured = paper({
+      reading_basis: 'abstract_only',
+      detail: { ...paper().detail, what_can_be_done_next: steps },
+    });
+    expect(PaperSchema.safeParse(structured).success).toBe(true);
+    expect(PaperSchema.safeParse(paper()).success).toBe(true);
+  });
+});
