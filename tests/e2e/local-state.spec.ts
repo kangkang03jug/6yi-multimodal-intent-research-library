@@ -4,7 +4,7 @@ test('local Deep Read and Favorite state persists, filters, and is namespaced', 
   await page.goto('/paper-pool/');
   const rows = page.locator('[data-paper-row]');
   if ((await rows.count()) === 0) test.skip();
-  const paperHref = await rows.first().locator('a[href*="/papers/"]').getAttribute('href');
+  const paperHref = await rows.first().locator('a[href*="/papers/"]').first().getAttribute('href');
   expect(paperHref).toBeTruthy();
   await page.goto(paperHref!);
   await page.locator('[data-local-field="deep_read"]').check();

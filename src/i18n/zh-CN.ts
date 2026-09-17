@@ -150,7 +150,7 @@ export const zhCN = {
     tagsPlaceholder: '使用英文逗号分隔，例如 AI4SE, Agent',
     notes: '我的笔记',
     notesPlaceholder: '私密、持久的 Markdown 笔记…',
-    savePersonal: '保存阅读状态与笔记',
+    savePersonal: '保存个人状态与笔记',
     saveSummary: '保存 AI 总结修正',
     viewCommit: '查看 GitHub commit ↗',
     notesHint: '我的笔记和我的标签与生成的论文内容分开存储。写入需要 GitHub 所有者身份验证。',

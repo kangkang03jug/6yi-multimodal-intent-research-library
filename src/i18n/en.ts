@@ -164,7 +164,7 @@ export const en = {
     tagsPlaceholder: 'Comma-separated, for example AI4SE, Agent',
     notes: 'My Notes',
     notesPlaceholder: 'Private, durable Markdown notes…',
-    savePersonal: 'Save reading state and notes',
+    savePersonal: 'Save personal state and notes',
     saveSummary: 'Save AI summary correction',
     viewCommit: 'View GitHub commit ↗',
     notesHint:

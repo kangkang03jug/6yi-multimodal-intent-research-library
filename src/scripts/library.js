@@ -206,7 +206,7 @@ import { localStateStorageKey, parseLocalState, serializeLocalState } from '../l
       localState[id] = { ...paperLocalState(id), [input.dataset.localField]: input.checked };
       writeLocalState(localState);
       updateLocalViews();
-      apply();
+      if (!localFilter) apply();
     });
   });
   if (!localFilter) apply();
