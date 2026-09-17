@@ -1,0 +1,54 @@
+{
+  "id": "survey-multimodal-intent-recognition",
+  "title": "A Survey on Multi-modal Intent Recognition: Recent Advances and New Frontiers",
+  "authors": ["Zhihong Zhu", "Fan Zhang", "Yunyan Zhang", "Jinghan Sun", "Zhiqi Huang", "Qingqing Long", "Bowen Xing", "Xian Wu"],
+  "year": 2025,
+  "publication_date": "2025-11-04",
+  "venue_or_source": "Findings of EMNLP",
+  "venue_type": "Conference",
+  "ranking": {"ccf": null, "cas": null, "jcr": null, "ranking_year": null, "ranking_source": null},
+  "identifiers": {"doi": "10.18653/v1/2025.findings-emnlp.823", "arxiv": null, "openreview": null},
+  "urls": {"paper": "https://aclanthology.org/2025.findings-emnlp.823/", "code": null},
+  "topics": ["Survey", "Taxonomy", "Evaluation", "Future Directions"],
+  "relevance": "High",
+  "reading_basis": "official_html",
+  "quick_read": {
+    "tldr": "这篇综述统一梳理文本、视觉和声学信号下的多模态意图识别方法、评测协议与开放问题。",
+    "problem_and_motivation": "MIR 研究快速增长但缺少统一 taxonomy、leaderboard 和跨模态视角，导致方法与数据难以横向比较。",
+    "core_method": "作者从信号类型、评测协议、方法和资源四个层面组织领域，并总结多任务、多领域、多语言等前沿方向。",
+    "key_results": "论文提供统一框架、三个 leaderboard 和开放资源汇总，覆盖 textual、visual/image-video 与 acoustic signals。",
+    "why_it_matters": "它适合成为 6Yi 的阅读地图，帮助把 Paper Pool 按数据、模型、评测和应用建立结构化索引。"
+  },
+  "detail": {
+    "motivation": "多模态意图识别涉及语言、面部表情、姿态和声学等互补信号，但不同工作使用的 taxonomy、数据和指标差异较大，缺少统一入口。",
+    "contributions": [
+      {"contribution": "首次系统覆盖 MIR 的文本、视觉和声学信号，并整理数据集与方法谱系。", "source": "Abstract; Introduction"},
+      {"contribution": "建立涵盖评测协议与先进方法的统一 taxonomy，并给出三个 leaderboard。", "source": "Abstract; Taxonomy"},
+      {"contribution": "总结多任务、多领域、多语言等前沿方向，汇总论文、数据与 leaderboard 资源。", "source": "Abstract; Future Directions"}
+    ],
+    "research_questions": [
+      {"type": "inferred", "question": "如何用统一的 taxonomy 和评测协议比较不同模态、数据集与方法？", "original_question": null, "how": "按信号类型、任务设定、指标和模型方法组织文献，并构建 leaderboard 与资源表。", "answer": "综述给出了一套统一框架，同时指出多任务、多领域和多语言仍是重要发展方向。", "meaning": "6Yi 的文献库应把评测协议和数据属性作为一等索引，而不是只按模型名称归档。", "source": "Introduction/Motivation"}
+    ],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "综述以文本、视觉/视频、声学等输入信号为轴，结合 evaluation protocol、先进方法、数据资源和开放问题建立统一分类框架。",
+    "experiments_and_key_findings": "作为综述论文，其主要产出是方法与资源的系统整理、统一 taxonomy 和 leaderboard，而非单一模型实验。",
+    "limitations": {
+      "author_reported": ["综述依赖已有公开研究与资源，领域快速变化会带来覆盖滞后。", "不同数据集的标签和指标仍可能难以完全对齐。"],
+      "ai_analysis": ["leaderboard 需要持续记录数据版本、模态可用性和预训练数据污染。", "未来可进一步纳入可解释性、鲁棒性与真实交互成本指标。"]
+    },
+    "relation_to_research": "这篇综述是 6Yi Research Library 的导航论文，可用于设计主题 taxonomy、每日推荐策略和后续阅读优先级。",
+    "what_can_be_done_next": "据综述框架重构 Paper Pool 标签，建立数据集、融合、prompt/LLM、偏置诊断与应用五条浏览路径。"
+  },
+  "original_abstract": "This survey reviews multimodal intent recognition across textual, visual and acoustic signals, proposes a unified taxonomy and evaluation framework, discusses emerging frontiers, and collects open-source resources.",
+  "bibtex": "@inproceedings{zhu-etal-2025-survey, title={A Survey on Multi-modal Intent Recognition: Recent Advances and New Frontiers}, author={Zhu, Zhihong and Zhang, Fan and Zhang, Yunyan and Sun, Jinghan and Huang, Zhiqi and Long, Qingqing and Xing, Bowen and Wu, Xian}, booktitle={Findings of EMNLP}, year={2025}, doi={10.18653/v1/2025.findings-emnlp.823}}",
+  "figures": [],
+  "evidence": [
+    {"claim": "综述覆盖 textual、visual/image-video 和 acoustic signals。", "locator": "Abstract", "url": "https://aclanthology.org/2025.findings-emnlp.823/"},
+    {"claim": "论文提出统一 taxonomy、评测框架并汇总开放资源。", "locator": "Abstract; Contributions", "url": "https://aclanthology.org/2025.findings-emnlp.823/"}
+  ],
+  "generated_by": "6Yi Research Library bootstrap",
+  "generated_at": "2026-09-17T08:00:00Z",
+  "updated_at": "2026-09-17T08:00:00Z",
+  "owner_edited": false
+}

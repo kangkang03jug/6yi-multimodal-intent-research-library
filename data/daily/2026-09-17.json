@@ -1,0 +1,11 @@
+{
+  "date": "2026-09-17",
+  "recommendations": [
+    {"paper_id": "survey-multimodal-intent-recognition", "primary": true, "run_type": "scheduled"},
+    {"paper_id": "text-takes-over-modality-bias", "primary": false, "run_type": "scheduled"},
+    {"paper_id": "mintrec-a-new-dataset", "primary": false, "run_type": "scheduled"},
+    {"paper_id": "tcl-map-modality-aware-prompting", "primary": false, "run_type": "scheduled"},
+    {"paper_id": "mmiu-visual-intent-understanding", "primary": false, "run_type": "scheduled"},
+    {"paper_id": "mind-shopping-intention-distillation", "primary": false, "run_type": "scheduled"}
+  ]
+}

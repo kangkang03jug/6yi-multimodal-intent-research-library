@@ -1,0 +1,54 @@
+{
+  "id": "mind-shopping-intention-distillation",
+  "title": "MIND: Multimodal Shopping Intention Distillation from Large Vision-language Models for E-commerce Purchase Understanding",
+  "authors": ["Baixuan Xu", "Weiqi Wang", "Haochen Shi", "Wenxuan Ding", "Huihao Jing", "Tianqing Fang", "Jiaxin Bai", "Xin Liu", "Changlong Yu", "Zheng Li", "Chen Luo", "Qingyu Yin", "Bing Yin", "Long Chen", "Yangqiu Song"],
+  "year": 2024,
+  "publication_date": "2024-11-01",
+  "venue_or_source": "EMNLP",
+  "venue_type": "Conference",
+  "ranking": {"ccf": null, "cas": null, "jcr": null, "ranking_year": null, "ranking_source": null},
+  "identifiers": {"doi": "10.18653/v1/2024.emnlp-main.446", "arxiv": null, "openreview": null},
+  "urls": {"paper": "https://aclanthology.org/2024.emnlp-main.446/", "code": null},
+  "topics": ["Vision-Language Model", "E-commerce", "Intent Distillation", "Data Synthesis"],
+  "relevance": "Medium",
+  "reading_basis": "official_html",
+  "quick_read": {
+    "tldr": "MIND 从商品图像、元数据和共购关系中蒸馏大视觉语言模型，构建更偏向用户需求的购物意图知识库。",
+    "problem_and_motivation": "传统大规模意图生成容易偏向产品描述，忽略商品图片且依赖高成本人工验证。",
+    "core_method": "框架让 LVLM 从多模态商品信息推断意图，再通过 human-centric filtering 保留更典型、更有用的购买意图。",
+    "key_results": "在 107,215 个商品上生成 1,264,441 条意图；人工评估验证 plausibility、typicality 与下游收益。",
+    "why_it_matters": "它把意图识别延伸到大规模多模态意图知识构建，对 6Yi 的数据合成和应用型评测有启发。"
+  },
+  "detail": {
+    "motivation": "电商购买意图通常同时依赖商品文本、视觉外观和用户共购行为。只做产品中心的语言蒸馏既忽略视觉信息，也难以规模化产生以人为中心的意图。",
+    "contributions": [
+      {"contribution": "提出 MIND，从多模态商品元数据中蒸馏大视觉语言模型以生成购物意图。", "source": "Abstract; Introduction"},
+      {"contribution": "构建包含 1,264,441 条意图的 multimodal intention knowledge base，覆盖 126,142 个共购关系和 107,215 个商品。", "source": "Abstract; Data"},
+      {"contribution": "设计 human-centric filtering，并通过人工与下游实验验证生成质量和实用性。", "source": "Abstract; Experiments"}
+    ],
+    "research_questions": [
+      {"type": "inferred", "question": "商品视觉信息与角色感知过滤能否让自动生成的购买意图更贴近用户？", "original_question": null, "how": "比较不同提示、过滤机制和仅文本/产品中心生成策略的人评与下游结果。", "answer": "论文结果表明，多模态生成和 role-aware filtering 能提升意图的 plausibility、typicality 与下游收益。", "meaning": "意图数据质量不只取决于数量，还取决于是否建模用户角色和视觉证据。", "source": "Introduction/Motivation"}
+    ],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "MIND 使用 Amazon Review 的商品、图像和共购关系，让 LVLM 生成候选意图，再用角色感知过滤机制筛选 human-centric 意图，形成知识库并评估下游意图理解。",
+    "experiments_and_key_findings": "人工评估显示生成意图具有较高 plausibility 和 typicality；下游实验显示知识库有正向帮助，并且对不同 prompt 具有鲁棒性。",
+    "limitations": {
+      "author_reported": ["研究聚焦电商购买意图，其他领域的迁移效果未充分验证。", "生成数据的质量仍依赖 LVLM、提示和过滤器。"],
+      "ai_analysis": ["需要关注商品图像中的品牌、性别和文化偏差。", "大规模合成意图应配套去重、置信度和人类校准协议。"]
+    },
+    "relation_to_research": "MIND 为多模态意图识别提供了数据工程与应用场景视角，可作为 6Yi 研究中“意图知识库构建”支线的案例。",
+    "what_can_be_done_next": "将 MIND 的过滤思想迁移到对话/视频意图数据，比较模型生成、人工标注与真实行为标签之间的一致性。"
+  },
+  "original_abstract": "MIND is a multimodal framework for distilling shopping intentions from large vision-language models using product metadata and images, with human-centric filtering and downstream evaluation.",
+  "bibtex": "@inproceedings{xu-etal-2024-mind, title={MIND: Multimodal Shopping Intention Distillation from Large Vision-language Models for E-commerce Purchase Understanding}, author={Xu, Baixuan and Wang, Weiqi and Shi, Haochen and Ding, Wenxuan and Jing, Huihao and Fang, Tianqing and Bai, Jiaxin and Liu, Xin and Yu, Changlong and Li, Zheng and Luo, Chen and Yin, Qingyu and Yin, Bing and Chen, Long and Song, Yangqiu}, booktitle={EMNLP}, year={2024}, doi={10.18653/v1/2024.emnlp-main.446}}",
+  "figures": [],
+  "evidence": [
+    {"claim": "MIND 构建 1,264,441 条意图，覆盖 107,215 个商品。", "locator": "Abstract", "url": "https://aclanthology.org/2024.emnlp-main.446/"},
+    {"claim": "多模态生成与 role-aware filtering 带来正向下游收益。", "locator": "Abstract; Experiments", "url": "https://aclanthology.org/2024.emnlp-main.446/"}
+  ],
+  "generated_by": "6Yi Research Library bootstrap",
+  "generated_at": "2026-09-17T08:00:00Z",
+  "updated_at": "2026-09-17T08:00:00Z",
+  "owner_edited": false
+}

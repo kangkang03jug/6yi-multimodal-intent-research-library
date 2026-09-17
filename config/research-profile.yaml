@@ -1,11 +1,15 @@
 profile:
-  researcher: 'Your Name'
-  library_name: 'Your Research Library'
-  description: 'A calm, searchable research knowledge base.'
+  researcher: '6Yi'
+  library_name: '6Yi 的多模态意图识别 Research Library'
+  description: '围绕多模态意图识别，持续沉淀数据集、融合方法、评测诊断与可复现线索。'
 research_scope:
   primary:
-    - 'Your Primary Research Direction'
-  secondary: []
+    - '多模态意图识别'
+  secondary:
+    - 'Multimodal Intent Recognition'
+    - 'Vision-Language Understanding'
+    - 'Audio-Visual-Language Fusion'
+    - 'Dataset Bias and Evaluation'
 paper_selection:
   recent_year_window: 3
   priority: [quality, relevance]

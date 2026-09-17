@@ -1,0 +1,53 @@
+{
+  "id": "mmiu-visual-intent-understanding",
+  "title": "MMIU: Dataset for Visual Intent Understanding in Multimodal Assistants",
+  "authors": ["Alkesh Patel", "Joel Ruben Antony Moniz", "Roman Nguyen", "Nick Tzou", "Hadas Kotek", "Vincent Renkens"],
+  "year": 2021,
+  "publication_date": "2021-10-13",
+  "venue_or_source": "arXiv",
+  "venue_type": "Preprint",
+  "ranking": {"ccf": null, "cas": null, "jcr": null, "ranking_year": null, "ranking_source": null},
+  "identifiers": {"doi": null, "arxiv": "2110.06416", "openreview": null},
+  "urls": {"paper": "https://arxiv.org/abs/2110.06416", "code": null},
+  "topics": ["Dataset", "Visual Intent", "Multimodal Assistant", "Image-Question"],
+  "relevance": "High",
+  "reading_basis": "official_html",
+  "quick_read": {
+    "tldr": "MMIU 研究用户看图后会向多模态助手提出什么问题，并将图像与问题映射到 14 类意图。",
+    "problem_and_motivation": "VQA 和 VQG 数据集不等价于真实用户面对图片时的助手请求，且许多请求并非外部知识问答。",
+    "core_method": "作者收集图像相关问题与人工意图标注，比较 text-only、image-only、early/late fusion 和 multimodal transformer。",
+    "key_results": "图像会改变同一句话的意图解释；多模态 transformer 能对 image-question pair 进行 14 类意图分类。",
+    "why_it_matters": "它揭示了视觉上下文对语言意图消歧的直接作用，是研究视觉意图理解的早期基准。"
+  },
+  "detail": {
+    "motivation": "面向多模态助手的用户问题常依赖所见图片，而传统 VQA 数据并不覆盖这些真实的意图类别和非知识型请求。",
+    "contributions": [
+      {"contribution": "发布 MMIU 数据集，包含用户看图后提出的问题及人工意图标注。", "source": "Abstract; Introduction"},
+      {"contribution": "将 image-question pair 归入 14 类意图，并系统比较不同视觉语言融合策略。", "source": "Abstract; Experiments"}
+    ],
+    "research_questions": [
+      {"type": "inferred", "question": "视觉内容在多大程度上改变同一句语言请求的意图解释？", "original_question": null, "how": "构造相同 utterance 配合不同图片的案例，并比较 text-only、image-only 与融合模型。", "answer": "视觉内容可以将同一句话映射到不同的知识、购物或场景相关意图。", "meaning": "意图识别系统需要显式建模视觉证据，而不能把图片当作可有可无的附加输入。", "source": "Introduction/Motivation"}
+    ],
+    "research_questions_empty_reason": null,
+    "research_questions_empty_source": null,
+    "method": "数据以图片、用户问题和意图标签为核心；实验比较 text-only、image-only、early fusion、late fusion 与 LXMERT 等多模态模型。",
+    "experiments_and_key_findings": "案例分析显示同一语言在不同图像下会对应不同 intent；融合视觉与语言信息的模型在意图分类上能利用这种上下文。",
+    "limitations": {
+      "author_reported": ["数据聚焦图片与问题，未覆盖视频、音频等动态模态。", "意图类别与样本规模相对有限。"],
+      "ai_analysis": ["需要测试 OCR、文化背景和长尾意图对结果的影响。", "后续可将静态视觉意图与 MIntRec 的音视频意图统一到共享 taxonomy。"]
+    },
+    "relation_to_research": "MMIU 为 6Yi 的多模态意图识别提供视觉单元和上下文消歧视角，可作为图像-文本子方向的入门基线。",
+    "what_can_be_done_next": "把同 utterance/different image 案例扩展为系统化 counterfactual evaluation，测量视觉证据的必要性、充分性和鲁棒性。"
+  },
+  "original_abstract": "MMIU is a dataset for visual intent understanding in multimodal assistants. It contains questions and corresponding intents provided by human annotators while looking at images, and evaluates image-question intent classification into 14 intents.",
+  "bibtex": "@article{patel2021mmiu, title={MMIU: Dataset for Visual Intent Understanding in Multimodal Assistants}, author={Patel, Alkesh and Moniz, Joel Ruben Antony and Nguyen, Roman and Tzou, Nick and Kotek, Hadas and Renkens, Vincent}, journal={arXiv preprint arXiv:2110.06416}, year={2021}}",
+  "figures": [],
+  "evidence": [
+    {"claim": "MMIU 将 image-question pair 分类到 14 类意图。", "locator": "Abstract", "url": "https://arxiv.org/abs/2110.06416"},
+    {"claim": "同一句话在不同图像下可能对应不同意图。", "locator": "Figure 2; Examples", "url": "https://arxiv.org/abs/2110.06416"}
+  ],
+  "generated_by": "6Yi Research Library bootstrap",
+  "generated_at": "2026-09-17T08:00:00Z",
+  "updated_at": "2026-09-17T08:00:00Z",
+  "owner_edited": false
+}

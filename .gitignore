@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.npm-cache/
 .astro/
 playwright-report/
 test-results/
