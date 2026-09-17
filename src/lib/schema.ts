@@ -69,6 +69,7 @@ export const PaperSchema = z
           .object({
             type: z.enum(['explicit', 'inferred']),
             question: z.string(),
+            original_question: z.string().min(1).nullable(),
             how: z.string(),
             answer: z.string(),
             meaning: z.string(),
@@ -80,6 +81,13 @@ export const PaperSchema = z
                 code: 'custom',
                 path: ['source'],
                 message: 'Research Questions require a source locator.',
+              });
+            }
+            if (question.type === 'inferred' && question.original_question !== null) {
+              context.addIssue({
+                code: 'custom',
+                path: ['original_question'],
+                message: 'Inferred Research Questions must not include original wording.',
               });
             }
             if (

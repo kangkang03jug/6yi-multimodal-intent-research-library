@@ -324,11 +324,22 @@ function validResearchQuestions(value: unknown) {
     value.every(
       (question) =>
         isObject(question) &&
-        hasOnlyKeys(question, ['type', 'question', 'how', 'answer', 'meaning', 'source']) &&
+        hasOnlyKeys(question, [
+          'type',
+          'question',
+          'original_question',
+          'how',
+          'answer',
+          'meaning',
+          'source',
+        ]) &&
         (question.type === 'explicit' || question.type === 'inferred') &&
         ['question', 'how', 'answer', 'meaning'].every(
           (key) => typeof question[key] === 'string',
         ) &&
+        (question.original_question === null ||
+          (typeof question.original_question === 'string' && question.original_question.trim())) &&
+        (question.type !== 'inferred' || question.original_question === null) &&
         typeof question.source === 'string' &&
         question.source.trim().length > 0 &&
         (question.type !== 'inferred' || /introduction|motivation/i.test(question.source)),
