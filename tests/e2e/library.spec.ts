@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test';
 test('personalized library has accessible primary pages', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: '多模态意图识别' })).toBeVisible();
-  await expect(page.locator('.hero-subtitle')).toHaveText('Research Library');
+  await expect(page.locator('.eyebrow')).toContainText('研究知识库 ·');
+  await expect(page.locator('.hero-subtitle')).toHaveText('研究知识库');
   await expect(page.locator('.hero .lede')).toHaveText(
     '围绕多模态意图识别，持续沉淀数据集、融合方法、评测诊断与可复现线索。',
   );
